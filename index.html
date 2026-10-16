@@ -25,7 +25,7 @@
             background-color: var(--primary);
             color: #FFFFFF;
             text-align: center;
-            padding: 4rem 1rem;
+            padding: 3rem 1rem 4rem 1rem;
         }
         header h1 {
             margin: 0 0 0.5rem 0;
@@ -41,6 +41,8 @@
             max-width: 800px;
             margin: -2rem auto 4rem auto;
             padding: 0 1rem;
+            position: relative;
+            z-index: 10;
         }
         .card {
             background: var(--card-bg);
@@ -127,3 +129,40 @@
                 <li><strong>Up to 5 User Workflows Tested:</strong> Forms, navigation, checkout, or custom UI states.</li>
                 <li><strong>Prioritized Bug Report:</strong> Clear steps to reproduce, severity ratings, and device notes.</li>
                 <li><strong>1 Free Retest:</strong> We verify your bug fixes after you patch them.</li>
+                <li><strong>Fast Turnaround:</strong> Delivered straight to your inbox within 48 hours.</li>
+            </ul>
+            <p style="font-size: 0.875rem; color: #64748B; margin-top: 1.5rem;"><em>Note: Staging sites only. No production passwords or security/penetration testing accepted.</em></p>
+        </div>
+
+        <!-- Intake Form Card -->
+        <div class="card">
+            <h2>Request Your QA Check</h2>
+            <p>Fill out the details below to submit your project scope. Clicking submit will open your email client to send your request directly to us.</p>
+            
+            <form action="mailto:Hats4747@outlook.com" method="POST" enctype="text/plain">
+                <div class="form-group">
+                    <label for="contact_email">Your Email Address:</label>
+                    <input type="text" id="contact_email" name="Client_Email" placeholder="you@domain.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="staging_url">Staging URL or App Link:</label>
+                    <input type="text" id="staging_url" name="Staging_URL" placeholder="https://your-staging-site.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="workflows">Describe up to 5 Key Workflows to Test:</label>
+                    <textarea id="workflows" name="Workworkflows_To_Test" placeholder="1. User signup and email verification&#10;2. Main dashboard loading and button responsiveness&#10;3. Checkout form submission..." required></textarea>
+                </div>
+
+                <button type="submit">Submit QA Request</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2026 LaunchFlow QA Check. All rights reserved.
+    </footer>
+
+</body>
+</html>
