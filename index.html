@@ -3,166 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LaunchFlow QA Check | Manual Website and AI-App Testing</title>
+    <title>LaunchFlow | Expert Pre-Launch QA & Bug Hunting</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #0F172A;
-            --accent: #2563EB;
-            --background: #F8FAFC;
-            --card-bg: #FFFFFF;
-            --text: #334155;
-            --border: #E2E8F0;
+            --bg-color: #07090e;
+            --surface-color: #111522;
+            --surface-border: #1e263d;
+            --primary-accent: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.15);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
         }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--background);
-            color: var(--text);
-            line-height: 1.6;
+
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        header {
-            background-color: var(--primary);
-            color: #FFFFFF;
-            text-align: center;
-            padding: 3rem 1rem 4rem 1rem;
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 3rem 1rem;
+            overflow-x: hidden;
         }
-        header h1 {
-            margin: 0 0 0.5rem 0;
-            font-size: 2.5rem;
+
+        .ambient-glow {
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, rgba(7, 9, 14, 0) 70%);
+            z-index: -1;
+            pointer-events: none;
         }
-        header p {
-            font-size: 1.2rem;
-            color: #94A3B8;
-            max-width: 600px;
-            margin: 0 auto;
-        }
+
         .container {
-            max-width: 800px;
-            margin: -2rem auto 4rem auto;
-            padding: 0 1rem;
-            position: relative;
-            z-index: 10;
+            width: 100%;
+            max-width: 640px;
         }
-        .card {
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2rem;
+
+        .header {
+            text-align: center;
+            margin-bottom: 2.5rem;
         }
-        h2 {
-            color: var(--primary);
-            margin-top: 0;
-        }
-        .price-tag {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--accent);
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #60a5fa;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
             margin-bottom: 1rem;
+            letter-spacing: 0.02em;
         }
-        ul {
-            padding-left: 1.25rem;
+
+        .badge span {
+            width: 6px;
+            height: 6px;
+            background-color: #3b82f6;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #3b82f6;
         }
-        li {
+
+        .header h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.75rem;
+            color: #ffffff;
+        }
+
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        .card {
+            background-color: var(--surface-color);
+            border: 1px solid var(--surface-border);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .pricing-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--surface-border);
+            padding-bottom: 1.5rem;
+        }
+
+        .pricing-title h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+
+        .pricing-title p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .price-tag {
+            text-align: right;
+        }
+
+        .price-tag .amount {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        .price-tag .period {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: #cbd5e1;
+        }
+
+        .feature-list li svg {
+            width: 18px;
+            height: 18px;
+            color: #3b82f6;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .notice {
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid #3b82f6;
+            padding: 10px 14px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .form-section-title {
+            font-size: 1.15rem;
+            font-weight: 700;
             margin-bottom: 0.5rem;
+            color: #fff;
         }
+
+        .form-section-desc {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
         .form-group {
             margin-bottom: 1.25rem;
         }
+
         label {
             display: block;
+            font-size: 0.85rem;
             font-weight: 600;
+            color: #e2e8f0;
             margin-bottom: 0.5rem;
-            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
+
         input[type="text"], textarea {
             width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: 6px;
-            font-size: 1rem;
-            box-sizing: border-box;
+            background-color: #07090e;
+            border: 1px solid var(--surface-border);
+            border-radius: 8px;
+            padding: 0.85rem 1rem;
+            color: #fff;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
         }
+
+        input[type="text"]:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-accent);
+            box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
         textarea {
             resize: vertical;
-            height: 120px;
+            height: 110px;
         }
-        button {
-            background-color: var(--accent);
+
+        .submit-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
             color: white;
             border: none;
-            border-radius: 6px;
-            padding: 0.85rem 1.5rem;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: inherit;
             font-size: 1rem;
-            font-weight: bold;
+            font-weight: 700;
             cursor: pointer;
-            width: 100%;
-            transition: background-color 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+            margin-top: 0.5rem;
         }
-        button:hover {
-            background-color: #1D4ED8;
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            box-shadow: 0 6px 16px rgba(59, 130, 246, 0.4);
+            transform: translateY(-1px);
         }
-        footer {
+
+        .footer {
             text-align: center;
-            color: #64748B;
-            font-size: 0.875rem;
-            margin-bottom: 3rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            margin-top: 2rem;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>LaunchFlow QA Check</h1>
-        <p>Manual pre-launch testing for websites and AI web apps before you go live.</p>
-    </header>
+    <div class="ambient-glow"></div>
 
     <div class="container">
-        <!-- Service Details Card -->
+        <div class="header">
+            <div class="badge"><span></span> Accepting New Projects • 48hr Turnaround</div>
+            <h1>LaunchFlow QA Check</h1>
+            <p>Rigorous, human-powered pre-launch testing for modern websites and AI web applications.</p>
+        </div>
+
+        <!-- Service Package Card -->
         <div class="card">
-            <h2>The $39 QA Package</h2>
-            <div class="price-tag">$39 USD</div>
-            <p>Don't let bugs or broken UI flows hurt your launch. Get a rigorous, human-powered walkthrough of your app.</p>
-            <ul>
-                <li><strong>Up to 5 User Workflows Tested:</strong> Forms, navigation, checkout, or custom UI states.</li>
-                <li><strong>Prioritized Bug Report:</strong> Clear steps to reproduce, severity ratings, and device notes.</li>
-                <li><strong>1 Free Retest:</strong> We verify your bug fixes after you patch them.</li>
-                <li><strong>Fast Turnaround:</strong> Delivered straight to your inbox within 48 hours.</li>
+            <div class="pricing-header">
+                <div class="pricing-title">
+                    <h2>Complete QA Audit</h2>
+                    <p>Comprehensive pre-launch bug hunt</p>
+                </div>
+                <div class="price-tag">
+                    <div class="amount">$39</div>
+                    <div class="period">Flat Rate</div>
+                </div>
+            </div>
+
+            <ul class="feature-list">
+                <li>
+                    <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                    <span><strong>Up to 5 User Workflows:</strong> Forms, auth loops, payments, and navigation paths.</span>
+                </li>
+                <li>
+                    <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                    <span><strong>Prioritized Bug Report:</strong> Clear reproduction steps, device details, and severity tiers.</span>
+                </li>
+                <li>
+                    <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                    <span><strong>1 Free Retest:</strong> Full validation sweep after you patch reported fixes.</span>
+                </li>
             </ul>
-            <p style="font-size: 0.875rem; color: #64748B; margin-top: 1.5rem;"><em>Note: Staging sites only. No production passwords or security/penetration testing accepted.</em></p>
+
+            <div class="notice">
+                🔒 <strong>Secure Scope:</strong> Staging environments only. No production passwords or security/penetration testing accepted.
+            </div>
         </div>
 
         <!-- Intake Form Card -->
         <div class="card">
-            <h2>Request Your QA Check</h2>
-            <p>Fill out the details below to submit your project scope. Clicking submit will open your email client to send your request directly to us.</p>
+            <div class="form-section-title">Request Your QA Check</div>
+            <div class="form-section-desc">Submit your project details below to open a direct scoping request.</div>
             
             <form action="mailto:Hats4747@outlook.com" method="POST" enctype="text/plain">
                 <div class="form-group">
-                    <label for="contact_email">Your Email Address:</label>
-                    <input type="text" id="contact_email" name="Client_Email" placeholder="you@domain.com" required>
+                    <label for="contact_email">Your Email Address</label>
+                    <input type="text" id="contact_email" name="Client_Email" placeholder="founder@project.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="staging_url">Staging URL or App Link:</label>
-                    <input type="text" id="staging_url" name="Staging_URL" placeholder="https://your-staging-site.com" required>
+                    <label for="staging_url">Staging URL or App Link</label>
+                    <input type="text" id="staging_url" name="Staging_URL" placeholder="https://staging.yourproject.com" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="workflows">Describe up to 5 Key Workflows to Test:</label>
-                    <textarea id="workflows" name="Workworkflows_To_Test" placeholder="1. User signup and email verification&#10;2. Main dashboard loading and button responsiveness&#10;3. Checkout form submission..." required></textarea>
+                    <label for="workflows">Workflows to Test (Up to 5)</label>
+                    <textarea id="workflows" name="Workflows_To_Test" placeholder="1. User signup & onboarding flow&#10;2. Stripe checkout integration&#10;3. Dashboard generation speed..." required></textarea>
                 </div>
 
-                <button type="submit">Submit QA Request</button>
+                <button type="submit" class="submit-btn">Submit QA Request ($39)</button>
             </form>
         </div>
-    </div>
 
-    <footer>
-        &copy; 2026 LaunchFlow QA Check. All rights reserved.
-    </footer>
+        <div class="footer">
+            &copy; 2026 LaunchFlow. Built for high-speed builders.
+        </div>
+    </div>
 
 </body>
 </html>
