@@ -1,160 +1,129 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>LaunchFlow QA Check | Manual Website and AI-App Testing</title><meta name="description" content="Manual pre-launch testing for websites and AI-built web apps. Up to five agreed workflows, reproducible bug reports, one retest. $39 introductory package."><meta name="robots" content="index,follow">
-<style>
-*{box-sizing:border-box}
-:root{--bg:#fff;--fg:#0f1b33;--mut:#4d5a73;--card:#f4f6fb;--line:#d9dfec;--acc:#2457d6;--link:#1d4fc4;--hi:#b42318;--md:#9a5b00;--lo:#1b6b3c;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a1325;--fg:#e8edf7;--mut:#a3aec6;--card:#111c35;--line:#26345a;--link:#8fb0ff;--hi:#ff8f85;--md:#f2b155;--lo:#6fd39a;color-scheme:dark}}
-:root[data-theme="dark"]{--bg:#0a1325;--fg:#e8edf7;--mut:#a3aec6;--card:#111c35;--line:#26345a;--link:#8fb0ff;--hi:#ff8f85;--md:#f2b155;--lo:#6fd39a;color-scheme:dark}
-html{scroll-padding-top:env(safe-area-inset-top,0px)}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-a{color:var(--link)}h1,h2,h3{line-height:1.2;margin:0 0 .5em;letter-spacing:-.01em}h1{font-size:clamp(2rem,6vw,3.2rem)}h2{font-size:1.6rem}h3{font-size:1.1rem}
-p,ul,ol{margin:0 0 1em;max-width:70ch}:focus-visible{outline:3px solid #7aa2ff;outline-offset:2px}h1:focus{outline:none}
-.w{max-width:1040px;margin:0 auto;padding:0 20px}.pad{padding:44px 0}.mut{color:var(--mut)}
-.skip{position:absolute;left:-999px}.skip:focus{left:8px;top:8px;background:#fff;color:#000;padding:8px;z-index:9}
-header{background:#0b1e3f;color:#fff}header .w{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;min-height:64px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;color:#fff;text-decoration:none;font-size:1.05rem}
-nav{display:flex;gap:2px;flex-wrap:wrap}nav a{color:#d6e0f5;padding:8px 10px;border-radius:6px;text-decoration:none;font-size:15px}nav a:hover,nav a[aria-current]{background:#1b3566;color:#fff}
-#menu{display:none;background:none;border:1px solid #4a6199;color:#fff;border-radius:6px;padding:8px 12px;font:inherit}
-@media(max-width:780px){#menu{display:block}nav{display:none;width:100%;flex-direction:column;padding-bottom:10px}nav.open{display:flex}}
-.btn{display:inline-block;background:var(--acc);color:#fff;border:1px solid var(--acc);border-radius:8px;padding:12px 18px;font:inherit;font-weight:600;text-decoration:none;cursor:pointer;margin:0 8px 8px 0}
-.btn.s{background:transparent;color:var(--link);border-color:var(--line)}.hero .btn.s{color:#fff;border-color:#5b74ad}
-.hero{background:#0b1e3f;color:#fff;padding:56px 0 48px}.hero p{color:#cfdaf3;font-size:1.12rem}.tag{color:#9db8f5;font-size:1.2rem;font-weight:600}
-.grid{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px}
-.ban{border-left:4px solid var(--md);background:var(--card);padding:10px 14px;border-radius:6px;margin:14px 0}
-.price{font-size:2.6rem;font-weight:800}.alt{background:var(--card);border-block:1px solid var(--line)}
-details{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:var(--card)}summary{padding:12px 14px;cursor:pointer;font-weight:600}details>div,details>dl{padding:0 14px 14px}
-dt{font-weight:700;margin-top:10px}dd{margin:0}.sev{display:inline-block;padding:0 9px;border-radius:99px;font-size:13px;font-weight:700;border:1px solid currentColor;margin-right:8px}.s-High{color:var(--hi)}.s-Medium{color:var(--md)}.s-Low{color:var(--lo)}
-.tw{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:480px}td,th{border-bottom:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}
-.bar{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}.bar .btn{margin:0;padding:8px 14px}.bar [aria-pressed=true]{background:var(--acc);color:#fff;border-color:var(--acc)}
-label{display:block;font-weight:600;margin:14px 0 4px}input,select,textarea{width:100%;font:inherit;padding:10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg)}
-fieldset{border:1px solid var(--line);border-radius:8px;margin:14px 0}legend{font-weight:600;padding:0 6px}.c label{display:flex;gap:8px;font-weight:400;margin:6px 0;align-items:flex-start}.c input{width:auto;margin-top:6px}
-.err{color:var(--hi);font-size:14px;display:block}[aria-invalid=true]{border-color:var(--hi)}form{max-width:680px}textarea[readonly]{font-family:ui-monospace,Menlo,monospace;font-size:13px}
-footer{border-top:1px solid var(--line);padding:28px 0;color:var(--mut);font-size:14px}footer a{margin-right:12px}
-@media print{header,footer,.np{display:none!important}body{background:#fff;color:#000}:root{padding:0}details{border-color:#999}}
-</style></head><body>
-<a class="skip" href="#main" onclick="event.preventDefault();$('main').focus()">Skip to content</a>
-<header><div class="w"><a class="logo" href="#/"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><rect width="30" height="30" rx="7" fill="#2457d6"/><path d="M7 15l5 5 11-11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>LaunchFlow QA Check</a>
-<button id="menu" aria-expanded="false" aria-controls="nav">Menu</button>
-<nav id="nav" aria-label="Main"><a href="#/">Service</a><a href="#/pricing">Pricing</a><a href="#/sample">Sample report</a><a href="#/contact">Contact</a><a href="#/legal">Legal and scope</a><a href="#/intake" style="background:#2457d6;color:#fff">Get a QA Check</a></nav></div></header>
-<main id="main" tabindex="-1">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LaunchFlow QA Check | Manual Website and AI-App Testing</title>
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #2563EB;
+            --background: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text: #334155;
+            --border: #E2E8F0;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: var(--primary);
+            color: #FFFFFF;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+        header h1 {
+            margin: 0 0 0.5rem 0;
+            font-size: 2.5rem;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #94A3B8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .container {
+            max-width: 800px;
+            margin: -2rem auto 4rem auto;
+            padding: 0 1rem;
+        }
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+        h2 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        .price-tag {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+        ul {
+            padding-left: 1.25rem;
+        }
+        li {
+            margin-bottom: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        textarea {
+            resize: vertical;
+            height: 120px;
+        }
+        button {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 0.85rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #1D4ED8;
+        }
+        footer {
+            text-align: center;
+            color: #64748B;
+            font-size: 0.875rem;
+            margin-bottom: 3rem;
+        }
+    </style>
+</head>
+<body>
 
-<div data-page="home">
-<section class="hero"><div class="w"><h1 tabindex="-1">Find the failures before your customers do.</h1><p class="tag">Manual website and AI-app testing with clear, reproducible bug reports.</p>
-<p>A site can look finished while its forms, buttons, navigation and workflows fail in real use. We test the paths your customers actually take and document what breaks, step by step.</p>
-<a class="btn" href="#/intake">Get a QA Check</a><a class="btn s" href="#/sample">View a sample report</a></div></section>
-<section class="pad"><div class="w"><h2>What you get, and who it is for</h2><p>A person works through your agreed workflows by hand and sends a prioritized report: what failed, how to reproduce it, and what to fix first. It suits founders, solo developers, small businesses and creators about to launch a site or an AI-built web app.</p>
-<div class="grid"><div class="card"><h3>Forms and buttons</h3><p>Do inputs validate, submit and recover from mistakes?</p></div><div class="card"><h3>Navigation and links</h3><p>Do menus, back buttons and links go where people expect?</p></div><div class="card"><h3>Mobile layouts</h3><p>Does the page stay usable on narrow screens?</p></div><div class="card"><h3>Your key workflows</h3><p>Sign-up, checkout, booking: the tasks that earn or lose customers.</p></div></div></div></section>
-<section class="pad alt"><div class="w"><h2>The five-workflow limit</h2><p>A workflow is one start-to-finish task a visitor performs, such as creating an account, buying a product or sending a contact form. Before testing begins we agree on up to five. Anything beyond those five is outside the $39 package. Keeping the scope small keeps the price low and the report focused.</p></div></section>
-<section class="pad"><div class="w"><h2>Example findings</h2><div class="ban"><b>Sample content.</b> These findings come from a fictional demo app. They are not results from a real customer.</div>
-<div class="grid"><div class="card"><span class="sev s-High">High</span><h3>Checkout accepts invalid input</h3><p class="mut">An order goes through with a malformed email address.</p></div><div class="card"><span class="sev s-Medium">Medium</span><h3>Account menu stops opening</h3><p class="mut">After Back from Settings, the menu is dead until reload.</p></div><div class="card"><span class="sev s-Low">Low</span><h3>Button overflows at 320px</h3><p class="mut">The primary button runs past the screen edge.</p></div></div><p><a href="#/sample">Open the full interactive sample report</a></p></div></section>
-<section class="pad alt"><div class="w"><h2>The package</h2><p><span class="price">$39</span> <b>Launch QA Check.</b> One website or web app, up to five workflows, a prioritized report and one retest of reported fixes.</p><a class="btn" href="#/pricing">See what is included and excluded</a></div></section>
-<section class="pad"><div class="w"><h2>How it works</h2><ol><li><b>Send the intake request</b> with your URL and up to five workflows.</li><li><b>Scope is confirmed</b> by email, and we agree what will be tested.</li><li><b>Access and payment are arranged.</b> Use a staging site or temporary test account, never a production password. Online checkout is not enabled yet.</li><li><b>Manual testing</b> of the agreed workflows on the agreed browsers and devices.</li><li><b>You receive the report</b> with reproduction steps and priorities.</li><li><b>One retest</b> of the fixes you made to reported issues.</li></ol></div></section>
-<section class="pad alt"><div class="w"><h2>Scope and limitations</h2><ul><li>We report problems we observe. We do not promise to find every defect, and we do not certify that software is bug-free.</li><li>This is not a security service: no penetration testing, security audit or compliance certification.</li><li>We do not fix your code. The report tells you what to fix.</li><li>The operator tests manually. AI may help draft and organize the report, but every reported defect is verified by a person.</li></ul></div></section>
-<section class="pad"><div class="w"><h2>Frequently asked questions</h2>
-<details><summary>Do you need my password?</summary><div>No. Never send a production password. If a workflow needs a login, create a staging or temporary least-privilege account and share it only after scope is confirmed.</div></details>
-<details><summary>What counts as a workflow?</summary><div>One complete task, for example "guest checkout" or "sign up and verify email". The package covers up to five.</div></details>
-<details><summary>Is this a security test?</summary><div>No. It is functional testing: does the site work when people use it.</div></details>
-<details><summary>How fast is delivery?</summary><div>The target is within 48 hours after scope, access and payment are confirmed. It depends on access, complexity and the agreed scope.</div></details>
-<details><summary>Can I pay online right now?</summary><div>Not yet. Checkout is not configured, so this site does not take payments. After you send an intake request, payment is arranged directly once scope is confirmed.</div></details></div></section>
-<section class="hero"><div class="w"><h2>Ready to check your launch?</h2><p>Send up to five workflows and get a scoped answer.</p><a class="btn" href="#/intake">Get a QA Check</a></div></section>
-</div>
+    <header>
+        <h1>LaunchFlow QA Check</h1>
+        <p>Manual pre-launch testing for websites and AI web apps before you go live.</p>
+    </header>
 
-<div data-page="pricing" hidden><section class="pad"><div class="w"><h1 tabindex="-1">Pricing</h1><p>One introductory package. No discounts, countdowns or scarcity.</p>
-<div class="card"><h2>Launch QA Check</h2><p><span class="price">$39</span></p>
-<h3>Included</h3><ul><li>One website or web application</li><li>Up to five agreed user workflows</li><li>Manual functional checks</li><li>Forms, navigation, buttons and links</li><li>Basic responsive-layout checks</li><li>Prioritized bug report</li><li>Reproduction steps and evidence where practical</li><li>One retest of reported fixes within the agreed scope</li></ul>
-<h3>Not included</h3><ul><li>Penetration testing</li><li>Formal security audits</li><li>Compliance certifications</li><li>Exhaustive testing</li><li>Unlimited workflows</li><li>Guaranteed detection of all defects</li><li>Source-code remediation or development work</li></ul>
-<p><b>Delivery:</b> target within 48 hours after scope and access are confirmed and payment is received. Actual time depends on access, application complexity and the agreed scope. The clock does not start before all three are confirmed.</p>
-<div class="ban"><b>Payment status:</b> online checkout is not enabled. This site does not collect card details. Payment is arranged by the operator after scope is confirmed.</div>
-<a class="btn" href="#/intake">Get a QA Check</a><a class="btn s" href="#/sample">View a sample report</a></div></div></section></div>
-
-<div data-page="sample" hidden><section class="pad"><div class="w"><h1 tabindex="-1">Sample QA report</h1>
-<div class="ban"><b>Illustrative sample.</b> The demo app "NorthLeaf Shop" is fictional. Every finding, date and result below is invented to show the deliverable. None is a real finding.</div>
-<p class="np"><button class="btn s" id="print" type="button">Print / Save as PDF</button></p>
-<h2>Executive summary</h2><p>In this fictional test, 5 workflows were exercised and 3 issues were documented: 1 high, 1 medium, 1 low. The high-severity checkout issue should be fixed before launch.</p>
-<h2>Environment and scope</h2><ul><li>Target: NorthLeaf Shop staging site (fictional)</li><li>Browsers and devices: desktop Chrome, iPhone Safari, Android Chrome (sample)</li><li>Test account: temporary staging account (sample)</li></ul>
-<h2>Test coverage</h2><div class="tw"><table><thead><tr><th>Workflow</th><th>Areas checked</th><th>Findings</th></tr></thead><tbody><tr><td>Guest checkout</td><td>Form validation, order submit</td><td>1 high</td></tr><tr><td>Sign in and account</td><td>Login, account menu, settings</td><td>1 medium</td></tr><tr><td>Product search and filter</td><td>Search box, filters, results links</td><td>None observed</td></tr><tr><td>Contact form</td><td>Required fields, submit message</td><td>None observed</td></tr><tr><td>Mobile layout</td><td>320, 390 and 768 px widths</td><td>1 low</td></tr></tbody></table></div>
-<h2>Findings</h2><div class="bar np" role="group" aria-label="Filter by severity"><button class="btn s" data-f="All" aria-pressed="true">All</button><button class="btn s" data-f="High" aria-pressed="false">High</button><button class="btn s" data-f="Medium" aria-pressed="false">Medium</button><button class="btn s" data-f="Low" aria-pressed="false">Low</button><button class="btn s" id="exp" type="button">Expand all</button><button class="btn s" id="col" type="button">Collapse all</button></div>
-<div id="finds"></div><p id="none" hidden>No findings at this severity.</p>
-<h2>Prioritized remediation checklist</h2><div id="check" class="c"></div>
-<h2>Limitations</h2><p>A report lists problems observed in the agreed scope, on the dates and environments tested. It does not prove the absence of other defects and is not a security assessment.</p></div></section></div>
-
-<div data-page="intake" hidden><section class="pad"><div class="w"><h1 tabindex="-1">Request a QA Check</h1>
-<p>Launch QA Check, $39. Fill this in and you get a formatted summary to send us. <span id="tx"><b>Nothing is transmitted from this page</b>; no form backend is configured yet.</span></p>
-<form id="intake" novalidate><div class="ban"><b>Do not enter passwords, API keys or card details.</b> Use a staging account or temporary least-privilege access, shared only after scope is confirmed.</div><p id="errsum" class="err" role="alert"></p>
-<label for="name">Name</label><input id="name" autocomplete="name"><span class="err" id="e-name"></span>
-<label for="email">Email</label><input id="email" type="email" autocomplete="email"><span class="err" id="e-email"></span>
-<label for="url">Website or staging URL</label><input id="url" type="url" placeholder="https://staging.example.com"><span class="err" id="e-url"></span>
-<label for="type">Application type</label><select id="type"><option value="">Choose one</option><option>Marketing or business website</option><option>Online store</option><option>SaaS or web application</option><option>AI-built web app</option><option>Other</option></select><span class="err" id="e-type"></span>
-<label for="goal">Main objective</label><textarea id="goal" rows="3"></textarea><span class="err" id="e-goal"></span>
-<fieldset id="wf"><legend>Workflows to test (1 to 5)</legend><input class="wf" aria-label="Workflow 1"><input class="wf" aria-label="Workflow 2"><input class="wf" aria-label="Workflow 3"><input class="wf" aria-label="Workflow 4"><input class="wf" aria-label="Workflow 5"><span class="err" id="e-wf"></span></fieldset>
-<fieldset class="c"><legend>Browser and device preferences (optional)</legend><label><input type="checkbox" name="br" value="Desktop Chrome">Desktop Chrome</label><label><input type="checkbox" name="br" value="Desktop Firefox">Desktop Firefox</label><label><input type="checkbox" name="br" value="Desktop Edge">Desktop Edge</label><label><input type="checkbox" name="br" value="iPhone Safari">iPhone Safari</label><label><input type="checkbox" name="br" value="Android Chrome">Android Chrome</label></fieldset>
-<fieldset id="cr" class="c"><legend>Can you provide a test account?</legend><label><input type="radio" name="cr" value="Yes">Yes</label><label><input type="radio" name="cr" value="No">No</label><span class="err" id="e-cr"></span></fieldset>
-<label for="notes">Additional notes (optional)</label><textarea id="notes" rows="3"></textarea><span class="err" id="e-notes"></span>
-<div class="c"><label><input type="checkbox" id="auth">I am authorized to request testing of this site or app.</label><span class="err" id="e-auth"></span><label><input type="checkbox" id="scope">I agree to the <a href="#/pricing">scope and exclusions</a>.</label><span class="err" id="e-scope"></span><label><input type="checkbox" id="priv">I have read the <a href="#/legal">privacy draft</a>.</label><span class="err" id="e-priv"></span></div>
-<button class="btn" type="submit">Create intake summary</button></form><div id="out-i"></div></div></section></div>
-
-<div data-page="contact" hidden><section class="pad"><div class="w"><h1 tabindex="-1">Contact</h1>
-<p>Contact email: <span id="ce"><b>[not configured yet]</b></span></p><p class="mut">Email is the only contact method for now. Nothing you type below is sent until you email it yourself.</p>
-<form id="cform" novalidate><label for="cn">Name</label><input id="cn" autocomplete="name"><label for="cm">Message</label><textarea id="cm" rows="5"></textarea><span class="err" id="e-cm"></span><button class="btn" type="submit" style="margin-top:12px">Create email draft</button></form><div id="out-c"></div></div></section></div>
-
-<div data-page="legal" hidden><section class="pad"><div class="w"><h1 tabindex="-1">Legal and scope</h1>
-<div class="ban"><b>First drafts.</b> These pages need review by a qualified person before commercial launch. No legal compliance has been independently verified. Items in [brackets] are for the operator to decide.</div>
-<details open><summary>Scope and limitations</summary><div><p>LaunchFlow QA Check reports problems observed during manual functional testing of agreed workflows. It does not guarantee that software is bug-free, secure or compliant, and it is not penetration testing or a security audit.</p></div></details>
-<details><summary>Privacy policy (draft)</summary><div><p>This website sets no cookies and uses no analytics or third-party scripts. By default the intake form only builds a summary in your browser, and nothing is sent until you email it. If a form service is enabled, the details you submit go to that provider [operator: name it here] and to the operator. Details you send are used only to scope, perform and report on the test. We ask for no passwords, API keys or card numbers. Proposed retention: delete intake details and test evidence [90] days after the order closes, or sooner on request. [Operator: add legal name, contact and deletion-request process.]</p></div></details>
-<details><summary>Terms of service (draft)</summary><div><p>You confirm you are authorized to request testing of the named site or app. We test only the agreed workflows and report what we observe. The package includes up to five workflows and one retest. Delivery targets start once scope, access and payment are confirmed. We do not provide development work or guarantee detection of all defects. [Operator: add liability limits and governing law after legal review.]</p></div></details>
-<details><summary>Refund and cancellation (draft)</summary><div><p>Cancel any time before testing starts. [Operator: confirm refund terms before testing starts, after testing starts, and if the agreed scope cannot be delivered.]</p></div></details>
-<details><summary>Data handling and access (draft)</summary><div><p>Use a staging site or a temporary, least-privilege test account. Never share a production password. Credentials are not stored in browser storage or application logs, are shared only through a channel agreed with the operator [to be configured], and access should be revoked after delivery.</p></div></details></div></section></div>
-
-<div data-page="404" hidden><section class="pad"><div class="w"><h1 tabindex="-1">Page not found</h1><p>That page does not exist. Try the <a href="#/">service overview</a>, <a href="#/pricing">pricing</a> or the <a href="#/sample">sample report</a>.</p></div></section></div>
-</main>
-<footer><div class="w"><p><a href="#/">Service</a><a href="#/pricing">Pricing</a><a href="#/sample">Sample report</a><a href="#/intake">Get a QA Check</a><a href="#/contact">Contact</a><a href="#/legal">Legal drafts</a></p><p>LaunchFlow QA Check is a manual testing service. It is not a security, penetration-testing or compliance service. Online checkout is not enabled.</p></div></footer>
-<script>
-const CONFIG={contactEmail:"Hats4747@outlook.com",formEndpoint:"" /* optional: form-service URL. Empty keeps copy-only mode */};
-const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
-const T={home:"Manual Website and AI-App Testing",pricing:"Pricing: $39 Launch QA Check",sample:"Sample QA Report (Illustrative)",intake:"Request a QA Check",contact:"Contact",legal:"Legal and Scope (Drafts)"};
-function route(){let p=((location.hash.replace(/^#\/?/,"")||"home").split("?")[0]).replace(/[^\w-]/g,"");if(!$(`[data-page="${p}"]`))p="404";
-$$("[data-page]").forEach(s=>s.hidden=s.dataset.page!==p);document.title=(T[p]\vert{}\vert{}"Page not found")+" \vert{} LaunchFlow QA Check"; $$
-("nav a").forEach(a=>{const h=a.getAttribute("href");(h==="#/"+p||(p==="home"&&h==="#/"))?a.setAttribute("aria-current","page"):a.removeAttribute("aria-current")});
-$("#nav").classList.remove("open");$("#menu").setAttribute("aria-expanded","false");scrollTo(0,0);$(`[data-page="${p}"] h1`)?.focus({preventScroll:true})}
-addEventListener("hashchange",route);$("#menu").onclick=()=>{const o=$("#nav").classList.toggle("open");$("#menu").setAttribute("aria-expanded",o)};
-if(CONFIG.contactEmail)$("#ce").innerHTML=`<a href="mailto:${CONFIG.contactEmail}">${CONFIG.contactEmail}</a>`;
-/* sample report (fictional data) */
-const EV="[Illustrative placeholder: a screenshot or screen recording would appear here]";
-const F=[
-{id:"DEMO-001",sev:"High",t:"Checkout accepts invalid input",wf:"Guest checkout",pre:"One item in the cart; not signed in.",st:["Add any item to the cart and open Checkout.","Enter \u201cnot-an-email\u201d in Email and \u201c!!!\u201d in Postal code.","Select Place order."],ex:"Inline errors appear and the order is blocked until both fields are valid.",ac:"(Fictional) An order confirmation page loads and shows the invalid email address.",im:"Receipts cannot be delivered, and bad orders need manual cleanup.",nx:"Validate on the client and the server, then retest with empty, malformed and over-long values."},
-{id:"DEMO-002",sev:"Medium",t:"Account navigation breaks after returning from settings",wf:"Sign in and account",pre:"Signed in with a temporary staging account.",st:["Open the Account menu and choose Settings.","Use the browser Back button.","Select the Account menu again."],ex:"The menu opens as before.",ac:"(Fictional) The menu does not open until the page is reloaded.",im:"Signed-in users may think account pages are unreachable.",nx:"Reset menu state on page restore, then retest Back and Forward navigation."},
-{id:"DEMO-003",sev:"Low",t:"Primary button overflows on a narrow mobile screen",wf:"Mobile layout",pre:"Viewport width set to 320 px.",st:["Open the Pricing page at 320 px wide.","Scroll to the \u201cStart free trial\u201d button."],ex:"The label wraps or the button fits inside the screen.",ac:"(Fictional) The button extends about 24 px past the right edge and the page scrolls sideways.",im:"Looks unpolished and can hide the button label on small phones.",nx:"Allow the label to wrap and set a maximum width, then recheck 320 px."}];
-$("#finds").innerHTML=F.map(f=>`<details data-sev="${f.sev}"><summary><span class="sev s-${f.sev}">${f.sev}</span><b>${f.id}</b> ${f.t}</summary><dl><dt>Affected workflow</dt><dd>${f.wf}</dd><dt>Preconditions</dt><dd>${f.pre}</dd><dt>Reproduction steps</dt><dd><ol>${f.st.map(s=>`<li>${s}</li>`).join("")}</ol></dd><dt>Expected behavior</dt><dd>${f.ex}</dd><dt>Actual behavior (fictional example)</dt><dd>${f.ac}</dd><dt>Impact</dt><dd>${f.im}</dd><dt>Recommended next action</dt><dd>${f.nx}</dd><dt>Evidence</dt><dd><i>${EV}</i></dd></dl></details>`).join("");
-$("#check").innerHTML=F.map(f=>`<label><input type="checkbox"><span><b>${f.id}</b> (${f.sev}): ${f.nx}</span></label>`).join("");
-const setAll=o=>$$("#finds details").forEach(d=>d.open=o);$("#exp").onclick=()=>setAll(true);$("#col").onclick=()=>setAll(false); $$("[data-f]").forEach(b=>b.onclick=()=>{$$("[data-f]").forEach(x=>x.setAttribute("aria-pressed",x===b));let n=0;$$("#finds details").forEach(d=>{const s=b.dataset.f==="All"\vert{}\vert{}d.dataset.sev===b.dataset.f;d.hidden=!s;n+=s});$("#none").hidden=n>0});
-$("#print").onclick=()=>{setAll(true);try{print()}catch(e){alert("Printing is blocked here. Use your browser's Print command.")}};addEventListener("beforeprint",()=>setAll(true));
-/* output panel with copy; nothing is sent anywhere */
-function showOut(id,title,note,text,subject){const b=$(id);b.innerHTML=`<h2 tabindex="-1">${title}</h2><div class="ban">${note}</div><textarea readonly rows="14" aria-label="${title}"></textarea><p><button type="button" class="btn copy">Copy text</button><a class="btn s mail" hidden>Open in email app</a></p>`;
-const ta=$("textarea",b);ta.value=text;if(CONFIG.contactEmail){const a=$(".mail",b);a.hidden=false;a.href=`mailto:${CONFIG.contactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(text)}`}$("h2",b).focus()}
-document.addEventListener("click",async e=>{const b=e.target.closest(".copy");if(!b)return;const ta=$("textarea",b.closest("div"));let ok=false;try{await navigator.clipboard.writeText(ta.value);ok=true}catch{ta.select();try{ok=document.execCommand("copy")}catch{}}
-b.textContent=ok?"Copied":"Press Ctrl or Cmd + C to copy";setTimeout(()=>b.textContent="Copy text",2500)});
-const NOSEND=`<b>This has not been sent to LaunchFlow.</b> Nothing was transmitted or stored. Copy the text and email it to ${CONFIG.contactEmail}.`;
-/* intake */
-const R={name:v=>v.trim()?"":"Enter your name.",email:v=>/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim())?"":"Enter a valid email address.",
-url:v=>{try{return/^https?:$/.test(new URL(v.trim()).protocol)?"":"Use an http or https address."}catch{return"Enter a full URL such as https://staging.example.com."}},
-type:v=>v?"":"Choose an application type.",goal:v=>v.trim().length>=10?"":"Describe your main objective in at least 10 characters."};
-const SECRET=/(pass(word|wd)?|api[_ -]?key|secret|token)\s*[:=]|\b(?:\d[ -]?){13,19}\b/i,KEYS=["name","email","url","type","goal","wf","cr","notes","auth","scope","priv"];
-$("#intake").addEventListener("submit",async e=>{e.preventDefault();const g=id=>$("#"+id).value,E={}; for(const k in R){const m=R[k](g(k));if(m)E[k]=m} const wf=$$(".wf").map(i=>i.value.trim()).filter(Boolean);if(!wf.length)E.wf="Describe at least one workflow (up to five).";else if(wf.some(w=>w.length>200))E.wf="Keep each workflow under 200 characters.";
-const cr=$("input[name=cr]:checked");if(!cr)E.cr="Choose yes or no.";
-[["auth","Confirm you are authorized to request testing."],["scope","Agree to the scope and exclusions."],["priv","Acknowledge the privacy draft."]].forEach(([k,m])=>{if(!$("#"+k).checked)E[k]=m});
-if(SECRET.test([g("name"),g("goal"),g("notes"),...wf].join(" ")))E.notes="Remove anything that looks like a password, key, token or card number. Share access later through a safe channel.";
-KEYS.forEach(k=>{const el=$("#"+k);$("#e-"+k).textContent=E[k]||"";if(el){el.setAttribute("aria-describedby","e-"+k);E[k]?el.setAttribute("aria-invalid","true"):el.removeAttribute("aria-invalid")}});
-const bad=KEYS.filter(k=>E[k]);$("#errsum").textContent=bad.length?`Please fix ${bad.length} item${bad.length>1?"s":""} below.`:"";
-if(bad.length){const el=$("#"+bad[0]);(el.matches("fieldset")?$("input",el):el).focus();$("#out-i").innerHTML="";return} const br=$$("input[name=br]:checked").map(i=>i.value);
-const txt=`LAUNCHFLOW QA CHECK: INTAKE SUMMARY\nStatus: NOT SENT (generated in your browser only)\nPackage: Launch QA Check, $39, up to 5 workflows, one retest\n\nName: ${g("name").trim()}\nEmail: ${g("email").trim()}\nURL: ${g("url").trim()}\nApplication type: ${g("type")}\nMain objective: ${g("goal").trim()}\n\nWorkflows to test:\n${wf.map((w,i)=>`${i+1}.${w}`).join("\n")}\n\nBrowsers and devices: ${br.join(", ")||"No preference"}\nTest account available: ${cr.value} (do not send passwords; staging access is shared after scope is confirmed)\nNotes: ${g("notes").trim()||"None"}\n\nConfirmed: authorized to request testing; agrees to scope and exclusions; read the privacy draft.`;
-if(!CONFIG.formEndpoint){showOut("#out-i","Your intake summary",NOSEND,txt,"QA Check intake request");return}
-const sb=$("#intake button[type=submit]"),l0=sb.textContent;sb.disabled=true;sb.textContent="Sending...";
-try{const r=await fetch(CONFIG.formEndpoint,{method:"POST",headers:{"Content-Type":"application/json",Accept:"application/json"},body:JSON.stringify({name:g("name").trim(),email:g("email").trim(),url:g("url").trim(),message:txt})});if(!r.ok)throw new Error(r.status);
-showOut("#out-i","Request received by the form service",`<b>The form service accepted your request.</b> Scope is not confirmed yet, and this is not a payment or booking. A reply will go to ${g("email").trim()}.`,txt,"QA Check intake request")}
-catch{showOut("#out-i","Request not sent",`<b>The request was not sent.</b> Copy the summary and email it to ${CONFIG.contactEmail}.`,txt,"QA Check intake request")}
-finally{sb.disabled=false;sb.textContent=l0}});
-/* contact */
-$("#cform").addEventListener("submit",e=>{e.preventDefault();const m=$("#cm").value.trim();$("#e-cm").textContent=m.length<10?"Write a message of at least 10 characters.":"";$("#cm").toggleAttribute("aria-invalid",m.length<10);if(m.length<10){$("#cm").focus();$("#out-c").innerHTML="";return}
-showOut("#out-c","Your email draft",NOSEND,`Subject: LaunchFlow QA Check question\n\nFrom: ${$("#cn").value.trim()||"(no name given)"}\n\n${m}`,"LaunchFlow QA Check question")});
-if(CONFIG.formEndpoint){$("#tx").textContent="Submitting sends your details to the form service the operator configured. It is not a payment or a booking.";$("#intake button[type=submit]").textContent="Send request"}
-route();
-</script></body></html>
+    <div class="container">
+        <!-- Service Details Card -->
+        <div class="card">
+            <h2>The $39 QA Package</h2>
+            <div class="price-tag">$39 USD</div>
+            <p>Don't let bugs or broken UI flows hurt your launch. Get a rigorous, human-powered walkthrough of your app.</p>
+            <ul>
+                <li><strong>Up to 5 User Workflows Tested:</strong> Forms, navigation, checkout, or custom UI states.</li>
+                <li><strong>Prioritized Bug Report:</strong> Clear steps to reproduce, severity ratings, and device notes.</li>
+                <li><strong>1 Free Retest:</strong> We verify your bug fixes after you patch them.</li>
